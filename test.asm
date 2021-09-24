@@ -53,22 +53,32 @@ mainloop:
 
 	cmp		dword [resp], 's'
 	je		shutdown
-
-	cmp		dword [resp], 'j'
+	
+	cmp		dword [resp], 0
+	je		start_cmp_arrow
+	
+	cmp		dword [resp], 224
+	je		start_cmp_arrow
+	
+	call	cont_no_right
+	
+start_cmp_arrow:
+	call	readkey
+	cmp		dword [resp], 'P'
 	jne		cont_no_down
 	call	down
 cont_no_down:
-	cmp		dword [resp], 'k'
+	cmp		dword [resp], 'H'
 	jne		cont_no_up
 	call	up
 cont_no_up:
 
-	cmp		dword [resp], 'h'
+	cmp		dword [resp], 'K'
 	jne		cont_no_left
 	call	left
 cont_no_left:
 
-	cmp		dword [resp], 'l'
+	cmp		dword [resp], 'M'
 	jne		cont_no_right
 	call	right
 cont_no_right:
